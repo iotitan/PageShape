@@ -1,0 +1,13 @@
+{"name":"Matt",
+"elements":[	
+	{"name":"copper","prop":["red","metal"]},
+	{"name":"iron","prop":["silver","metal"]},	
+	{"name":"helium","prop":["colorless","gas"]}
+],
+"hasGems":true,
+"hasManyGems":true,
+"hasTooManyGems":false,
+"gems":
+	{"red":["ruby","red agate"],
+	 "blue":["sapphire","azurite"]}
+}

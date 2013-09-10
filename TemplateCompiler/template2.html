@@ -1,0 +1,21 @@
+<div>
+	<ul>
+	{{#each items}}
+			{{#if @index == 1}}
+				<li>The first item is {{this}}</li>
+			{{#elseif @index == @length}}
+				<li>The last item is {{this}}</li>
+			{{#else}}
+				<li>{{this}}</li>
+				<ul>
+					{{#each ../items}}
+							{{#if @index == ../@index}}
+								<li>more {{../this}}</li>
+							{{/if}}
+					{{/each}}
+				</ul>
+			{{/if}}
+	{{/each}}
+	</ul>
+	
+</div>

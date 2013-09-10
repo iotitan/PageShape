@@ -1,0 +1,60 @@
+<div>
+
+	<h1>{{name}}'s List of Elements</h1>
+	<span>Elements:</span><br />
+	
+	<div class='elements'>
+	
+	
+		{{#each elements}}
+			<div>
+				<span>{{../name}}'s {{name}}</span><br />
+				Element #{{@index}} of {{@length}}
+				<ul>
+					{{#each prop}}
+						<li> {{../@index}}.{{@index}}: {{this}}</li>
+					{{#else}}
+						<li>No properties, how boring...</li>
+					{{/each}}
+				</ul>
+			</div>
+		{{/each}}
+		
+		{{#if hasGems}}
+			<div>
+				<span>{{name}} has gems! </span>
+				{{#if hasManyGems}}
+					Many gems! 
+				{{#else}}
+					A few gems. 
+				{{/if}}
+				
+				{{#if hasTooManyGems}}
+					Many many gems!
+				{{#else}}
+					Not too many gems.
+				{{/if}}
+			</div>
+		{{/if}}
+		
+		<br /><br />
+		
+		{{#with gems}}
+			{{#each red}}
+				{{#if @index == @length}}
+					{{this}}
+				{{#else}}
+					{{this}}, 
+				{{/if}}
+			{{/each}}
+		{{/with}}
+		
+		<br /><br />
+		
+		There are as many stars as there are elements listed above: 
+		
+		{{#arrayLengthStars elements}}
+		
+	</div>
+	
+</div>

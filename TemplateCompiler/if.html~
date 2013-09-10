@@ -1,0 +1,21 @@
+<div>
+
+	<h1>{{name}}'s IF Statement Test</h1>
+	<span>Elements:</span><br />
+	
+	<div class='elements'>
+		{{#each elements}}
+			<span>{{name}}</span>
+			<ol>
+				{{#if prop}}
+					<li>{{../../name}} said {{this}}</li>
+					<li>{{this}} again</li>
+					<li>{{this}} and again</li>
+				{{#else}}
+					<li>No properties, how boring...</li>
+				{{/if}}
+			</ol>
+		{{/each}}
+	</div>
+	
+</div>

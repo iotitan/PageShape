@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<script type="text/javascript">
+			var t = new Date();
+			var s = t.getMilliseconds();
+
+			var data = JSON.parse('{"name":"Matt","elements":[		{"name":"copper","prop":["red","metal"]},	{"name":"iron","prop":["silver","metal"]},		{"name":"helium","prop":["colorless","gas"]}],"hasGems":true,"hasManyGems":true,"hasTooManyGems":false,"gems":	{"red":["ruby","red agate"],	 "blue":["sapphire","azurite"]}}');
+			//var data = {"items":["apple","orange","banana","lime","blueberry","grape"]};
+			
+			
+		</script>
+		<script type="text/javascript" src="../PageShape.js"></script>
+		<script type="text/javascript" src="../TemplateCompiler/template.js"></script>
+		<style>
+			body {
+				margin: 0px;
+				font-family: helvetica;
+				font-size: 14px;
+			}
+			h1 {
+				width: 100%;
+				display: block;
+				background-color: rgb(200,200,200);
+				color: rgb(255,255,255);
+				margin-top: 0px;
+				padding: 10px;
+				letter-spacing: 5px;
+			}
+			.elements {
+				padding: 10px;
+			}
+		</style>
+		
+	</head>
+	
+	<body>
+		
+		<div id="template">
+		</div>
+	
+
+
+
+		<script type="text/javascript">
+		
+			PageShape.addFunction("arrayLengthStars",function(data)
+			{
+				var out = "";
+				for(var i = 0; i < data.length; i++)
+					out += "*";
+				return out;
+				
+			});
+		
+			document.getElementById("template").innerHTML = PageShape.render("template.html",data);
+			var t2 = new Date();
+			var e = t2.getMilliseconds();
+			console.log("Render time: " + (e-s) + "ms");
+		</script>
+	</body>
+
+
+</html>
