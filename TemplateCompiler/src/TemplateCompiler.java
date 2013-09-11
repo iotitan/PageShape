@@ -16,7 +16,7 @@ import java.util.Stack;
 
 public class TemplateCompiler
 {
-	public enum KeyWord {EACH, IF, _IF, ELSEIF, ELSE, WITH};
+	public enum KeyWord {EACH, IF, ELSEIF, ELSE, WITH};
 	// for use in parsing
 	private static Stack<KeyWord> kwStack;
 	private static Stack<String[]> ifElseChain;
@@ -134,12 +134,7 @@ public class TemplateCompiler
 			String[] split = term.split(" ");
 			
 			print = removeWhitespace(escapeQuotes(in.substring(lastPos,bLoc)));
-			
-			// print what came before the tag, don't add command if there was no space between tags
-			if(print.trim().length() > 0)
-			{
-				commands.add(JSONObj(new String[]{"P",print}));
-			}
+			commands.add(JSONObj(new String[]{"P",print}));
 			
 			// parse open block tags
 			if(split[0].trim().charAt(0) == '#')
@@ -209,10 +204,7 @@ public class TemplateCompiler
 		// if no more brackets, take the rest of the input and print it
 		// THIS SHOULD NOT HAPPEN UNLESS EOF
 		print = removeWhitespace(escapeQuotes(in.substring(lastPos)));
-		if(print.trim().length() > 0)
-		{
-			commands.add(JSONObj(new String[]{"P",print}));
-		}
+		commands.add(JSONObj(new String[]{"P",print}));
 		
 		return lastPos+2;
 	}
@@ -441,10 +433,14 @@ public class TemplateCompiler
 			}
 			
 			// finish off if or last elseif
+			// look ahead one to see if we need to add space for else
+			int addJump = 0;
+			if(!kwStack.isEmpty() && kwStack.peek() == KeyWord.ELSE)
+				addJump = 1;
 			temp = "";
 			for(int i = 1; i < curArgs.length; i++)
 				temp += curArgs[i]+" ";
-			commands.set(myLine, JSONObj(readExpression("I",temp,commands.size()+1)));
+			commands.set(myLine, JSONObj(readExpression("I",temp,commands.size()+addJump)));
 			
 			// finally handle else
 			if(!kwStack.isEmpty() && kwStack.peek() == KeyWord.ELSE)
